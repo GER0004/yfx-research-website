@@ -129,14 +129,14 @@ function EquityCurveChart({ data, startingBalance }) {
   const drawDuration = 4.8;
 
   return (
-    <div ref={ref} className="h-[190px] sm:h-[220px] lg:h-[250px] relative pl-10 sm:pl-12">
+    <div ref={ref} className="h-[190px] sm:h-[220px] lg:h-[250px] relative pl-8 sm:pl-12 overflow-hidden">
       {yLabels.map((yl, i) => (
         <div key={i} className="absolute left-0 right-0" style={{ top: yl.top }}>
-          <div className="absolute left-10 sm:left-12 right-0 h-px" style={{ background: "rgba(148,163,184,0.04)" }} />
+          <div className="absolute left-8 sm:left-12 right-0 h-px" style={{ background: "rgba(148,163,184,0.04)" }} />
         </div>
       ))}
 
-      <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-between pointer-events-none w-10 sm:w-12">
+      <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-between pointer-events-none w-8 sm:w-12">
         {yLabels.map((yl, i) => (
           <span key={i} className="text-[9px] sm:text-[10px] text-text-faint/60 font-mono leading-none text-right pr-2 -translate-y-[5px]">
             {yl.pct >= 0 ? "+" : ""}{yl.pct.toFixed(0)}%
@@ -147,8 +147,7 @@ function EquityCurveChart({ data, startingBalance }) {
       <svg
         viewBox={`0 0 ${w} ${h}`}
         preserveAspectRatio="none"
-        className="absolute top-0 bottom-0 right-0"
-        style={{ left: "3rem" }}
+        className="absolute top-0 bottom-0 left-8 sm:left-12 right-0"
       >
         <defs>
           <linearGradient id="eq-fill" x1="0" y1="0" x2="0" y2="1">
@@ -203,7 +202,7 @@ function EquityCurveChart({ data, startingBalance }) {
         )}
       </svg>
 
-      <div className="absolute -bottom-6 left-10 sm:left-12 right-0 flex pointer-events-none">
+      <div className="absolute -bottom-6 left-8 sm:left-12 right-0 flex pointer-events-none">
         {xLabels.map((xl, i) => (
           <span
             key={i}
@@ -336,7 +335,7 @@ export default function Performance() {
   );
 
   return (
-    <section id="performance" className="section-padding section-border" style={{ paddingBlock: "clamp(36px, 4.5vw, 64px)" }}>
+    <section id="performance" className="section-padding section-border overflow-hidden" style={{ paddingBlock: "clamp(36px, 4.5vw, 64px)" }}>
       <Container>
         <SectionLabel number="04" text="Performance" />
 

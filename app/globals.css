@@ -27,11 +27,17 @@ body {
   }
 
   .section-padding {
-    padding-block: clamp(64px, 10vw, 140px);
+    padding-block: clamp(48px, 10vw, 140px);
   }
 
   .section-border {
     border-top: 1px solid rgba(148, 163, 184, 0.08);
+  }
+}
+
+@media (max-width: 640px) {
+  .section-padding {
+    padding-block: 40px;
   }
 }
 
@@ -209,59 +215,68 @@ body {
     -webkit-mask-image:
       linear-gradient(to right,
         transparent   0%,
-        rgba(0,0,0,0.02) 5%,
-        rgba(0,0,0,0.08) 12%,
-        rgba(0,0,0,0.22) 20%,
-        rgba(0,0,0,0.45) 30%,
-        rgba(0,0,0,0.70) 40%,
-        rgba(0,0,0,0.90) 50%,
-        black 60%
+        rgba(0,0,0,0.06) 5%,
+        rgba(0,0,0,0.20) 10%,
+        rgba(0,0,0,0.50) 18%,
+        rgba(0,0,0,0.80) 26%,
+        black 35%,
+        black 65%,
+        rgba(0,0,0,0.80) 74%,
+        rgba(0,0,0,0.50) 82%,
+        rgba(0,0,0,0.20) 90%,
+        transparent 100%
       ),
       linear-gradient(to bottom,
         transparent,
-        rgba(0,0,0,0.5) 40px,
-        black 80px,
-        black calc(100% - 100px),
-        rgba(0,0,0,0.5) calc(100% - 40px),
+        rgba(0,0,0,0.4) 40px,
+        black 90px,
+        black calc(100% - 120px),
+        rgba(0,0,0,0.3) calc(100% - 40px),
         transparent
       );
     mask-image:
       linear-gradient(to right,
         transparent   0%,
-        rgba(0,0,0,0.02) 5%,
-        rgba(0,0,0,0.08) 12%,
-        rgba(0,0,0,0.22) 20%,
-        rgba(0,0,0,0.45) 30%,
-        rgba(0,0,0,0.70) 40%,
-        rgba(0,0,0,0.90) 50%,
-        black 60%
+        rgba(0,0,0,0.06) 5%,
+        rgba(0,0,0,0.20) 10%,
+        rgba(0,0,0,0.50) 18%,
+        rgba(0,0,0,0.80) 26%,
+        black 35%,
+        black 65%,
+        rgba(0,0,0,0.80) 74%,
+        rgba(0,0,0,0.50) 82%,
+        rgba(0,0,0,0.20) 90%,
+        transparent 100%
       ),
       linear-gradient(to bottom,
         transparent,
-        rgba(0,0,0,0.5) 40px,
-        black 80px,
-        black calc(100% - 100px),
-        rgba(0,0,0,0.5) calc(100% - 40px),
+        rgba(0,0,0,0.4) 40px,
+        black 90px,
+        black calc(100% - 120px),
+        rgba(0,0,0,0.3) calc(100% - 40px),
         transparent
       );
   }
 
   .hero-video {
-    width: 130%;
-    right: -20%;
+    width: 160%;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%) translateY(-45%) translateZ(0);
     min-height: 100%;
-    filter: brightness(0.72);
+    filter: brightness(0.68);
   }
 
   .hero-vignette {
-    background: radial-gradient(
-      ellipse 100% 80% at 50% 50%,
-      transparent 15%,
-      rgba(5,6,8,0.30) 40%,
-      rgba(5,6,8,0.65) 65%,
-      rgba(5,6,8,0.85) 85%,
-      #050608 100%
-    );
+    background:
+      linear-gradient(to bottom, transparent 0%, transparent 45%, rgba(5,6,8,0.5) 60%, rgba(5,6,8,0.85) 75%, #050608 90%),
+      radial-gradient(
+        ellipse 120% 80% at 50% 35%,
+        transparent 30%,
+        rgba(5,6,8,0.20) 50%,
+        rgba(5,6,8,0.50) 70%,
+        #050608 100%
+      );
   }
 }
 

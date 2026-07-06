@@ -1,0 +1,314 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap");
+
+/* ── Base ──────────────────────────────────────────────────── */
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050608;
+  color: #f8fafc;
+  overflow-x: hidden;
+}
+
+/* ── Utility layers ────────────────────────────────────────── */
+
+@layer components {
+  .container-yfx {
+    @apply w-full max-w-container mx-auto;
+    padding-inline: clamp(20px, 5vw, 32px);
+  }
+
+  .section-padding {
+    padding-block: clamp(64px, 10vw, 140px);
+  }
+
+  .section-border {
+    border-top: 1px solid rgba(148, 163, 184, 0.08);
+  }
+}
+
+/* ── Hero video ────────────────────────────────────────────── */
+
+.hero-video-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  will-change: transform;
+  transform: translateZ(0);
+
+  -webkit-mask-image:
+    linear-gradient(to right,
+      transparent   0%,
+      transparent   5%,
+      rgba(0,0,0,0.008) 10%,
+      rgba(0,0,0,0.02)  15%,
+      rgba(0,0,0,0.04)  20%,
+      rgba(0,0,0,0.08)  25%,
+      rgba(0,0,0,0.14)  30%,
+      rgba(0,0,0,0.22)  34%,
+      rgba(0,0,0,0.33)  38%,
+      rgba(0,0,0,0.46)  42%,
+      rgba(0,0,0,0.58)  46%,
+      rgba(0,0,0,0.70)  50%,
+      rgba(0,0,0,0.82)  54%,
+      rgba(0,0,0,0.91)  58%,
+      rgba(0,0,0,0.97)  63%,
+      black 68%
+    ),
+    linear-gradient(to bottom,
+      transparent,
+      rgba(0,0,0,0.4) 60px,
+      black 140px,
+      black calc(100% - 180px),
+      rgba(0,0,0,0.4) calc(100% - 60px),
+      transparent
+    );
+  mask-image:
+    linear-gradient(to right,
+      transparent   0%,
+      transparent   5%,
+      rgba(0,0,0,0.008) 10%,
+      rgba(0,0,0,0.02)  15%,
+      rgba(0,0,0,0.04)  20%,
+      rgba(0,0,0,0.08)  25%,
+      rgba(0,0,0,0.14)  30%,
+      rgba(0,0,0,0.22)  34%,
+      rgba(0,0,0,0.33)  38%,
+      rgba(0,0,0,0.46)  42%,
+      rgba(0,0,0,0.58)  46%,
+      rgba(0,0,0,0.70)  50%,
+      rgba(0,0,0,0.82)  54%,
+      rgba(0,0,0,0.91)  58%,
+      rgba(0,0,0,0.97)  63%,
+      black 68%
+    ),
+    linear-gradient(to bottom,
+      transparent,
+      rgba(0,0,0,0.4) 60px,
+      black 140px,
+      black calc(100% - 180px),
+      rgba(0,0,0,0.4) calc(100% - 60px),
+      transparent
+    );
+
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+}
+
+.hero-video {
+  position: absolute;
+  top: 50%;
+  right: -12%;
+  transform: translateY(-50%) translateZ(0);
+  width: 90%;
+  height: auto;
+  min-height: 110%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.82);
+}
+
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 80% 70% at 60% 50%,
+    transparent 30%,
+    rgba(5,6,8,0.15) 55%,
+    rgba(5,6,8,0.45) 75%,
+    rgba(5,6,8,0.75) 90%,
+    #050608 100%
+  );
+}
+
+/* ── Hero video — tablet ───────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .hero-video-wrap {
+    -webkit-mask-image:
+      linear-gradient(to right,
+        transparent   0%,
+        transparent   2%,
+        rgba(0,0,0,0.01) 6%,
+        rgba(0,0,0,0.04) 11%,
+        rgba(0,0,0,0.10) 16%,
+        rgba(0,0,0,0.20) 22%,
+        rgba(0,0,0,0.35) 28%,
+        rgba(0,0,0,0.52) 34%,
+        rgba(0,0,0,0.70) 41%,
+        rgba(0,0,0,0.85) 48%,
+        rgba(0,0,0,0.95) 56%,
+        black 64%
+      ),
+      linear-gradient(to bottom,
+        transparent,
+        rgba(0,0,0,0.4) 50px,
+        black 100px,
+        black calc(100% - 140px),
+        rgba(0,0,0,0.4) calc(100% - 50px),
+        transparent
+      );
+    mask-image:
+      linear-gradient(to right,
+        transparent   0%,
+        transparent   2%,
+        rgba(0,0,0,0.01) 6%,
+        rgba(0,0,0,0.04) 11%,
+        rgba(0,0,0,0.10) 16%,
+        rgba(0,0,0,0.20) 22%,
+        rgba(0,0,0,0.35) 28%,
+        rgba(0,0,0,0.52) 34%,
+        rgba(0,0,0,0.70) 41%,
+        rgba(0,0,0,0.85) 48%,
+        rgba(0,0,0,0.95) 56%,
+        black 64%
+      ),
+      linear-gradient(to bottom,
+        transparent,
+        rgba(0,0,0,0.4) 50px,
+        black 100px,
+        black calc(100% - 140px),
+        rgba(0,0,0,0.4) calc(100% - 50px),
+        transparent
+      );
+  }
+
+  .hero-video {
+    width: 105%;
+    right: -10%;
+    min-height: 105%;
+  }
+
+  .hero-vignette {
+    background: radial-gradient(
+      ellipse 90% 70% at 55% 50%,
+      transparent 25%,
+      rgba(5,6,8,0.20) 50%,
+      rgba(5,6,8,0.55) 72%,
+      rgba(5,6,8,0.80) 88%,
+      #050608 100%
+    );
+  }
+}
+
+/* ── Hero video — mobile ───────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .hero-video-wrap {
+    -webkit-mask-image:
+      linear-gradient(to right,
+        transparent   0%,
+        rgba(0,0,0,0.02) 5%,
+        rgba(0,0,0,0.08) 12%,
+        rgba(0,0,0,0.22) 20%,
+        rgba(0,0,0,0.45) 30%,
+        rgba(0,0,0,0.70) 40%,
+        rgba(0,0,0,0.90) 50%,
+        black 60%
+      ),
+      linear-gradient(to bottom,
+        transparent,
+        rgba(0,0,0,0.5) 40px,
+        black 80px,
+        black calc(100% - 100px),
+        rgba(0,0,0,0.5) calc(100% - 40px),
+        transparent
+      );
+    mask-image:
+      linear-gradient(to right,
+        transparent   0%,
+        rgba(0,0,0,0.02) 5%,
+        rgba(0,0,0,0.08) 12%,
+        rgba(0,0,0,0.22) 20%,
+        rgba(0,0,0,0.45) 30%,
+        rgba(0,0,0,0.70) 40%,
+        rgba(0,0,0,0.90) 50%,
+        black 60%
+      ),
+      linear-gradient(to bottom,
+        transparent,
+        rgba(0,0,0,0.5) 40px,
+        black 80px,
+        black calc(100% - 100px),
+        rgba(0,0,0,0.5) calc(100% - 40px),
+        transparent
+      );
+  }
+
+  .hero-video {
+    width: 130%;
+    right: -20%;
+    min-height: 100%;
+    filter: brightness(0.72);
+  }
+
+  .hero-vignette {
+    background: radial-gradient(
+      ellipse 100% 80% at 50% 50%,
+      transparent 15%,
+      rgba(5,6,8,0.30) 40%,
+      rgba(5,6,8,0.65) 65%,
+      rgba(5,6,8,0.85) 85%,
+      #050608 100%
+    );
+  }
+}
+
+/* ── Animations ────────────────────────────────────────────── */
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes chartDraw {
+  from { stroke-dashoffset: 2000; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes glowBreath {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.animate-status-pulse {
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+.animate-chart-draw {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: chartDraw 2.5s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+.animate-glow-breath {
+  animation: glowBreath 4s ease-in-out infinite;
+}
+
+.eco-node {
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.eco-node:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 40px rgba(37,99,235,0.12);
+  border-color: rgba(37,99,235,0.35) !important;
+}
+
+.process-card {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.process-card:hover {
+  border-color: rgba(148,163,184,0.18) !important;
+  box-shadow: 0 0 30px rgba(37,99,235,0.06);
+}

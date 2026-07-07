@@ -264,7 +264,7 @@ body {
     left: 50%;
     transform: translateX(-50%) translateY(-45%) translateZ(0);
     min-height: 100%;
-    filter: brightness(0.88) contrast(1.1) saturate(1.15);
+    filter: brightness(0.95) contrast(1.15) saturate(1.2);
   }
 
   .hero-vignette {
@@ -326,4 +326,31 @@ body {
 .process-card:hover {
   border-color: rgba(148,163,184,0.18) !important;
   box-shadow: 0 0 30px rgba(37,99,235,0.06);
+}
+
+/* ── Diagonal lines drift ─────────────────────────────────── */
+
+@keyframes diagonalDrift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(60px, -40px); }
+}
+
+.animate-diagonal-drift {
+  animation: diagonalDrift 25s linear infinite alternate;
+}
+
+/* ── Blue line draw ───────────────────────────────────────── */
+
+@keyframes lineReveal {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.line-draw {
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.line-draw-visible {
+  animation: lineReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

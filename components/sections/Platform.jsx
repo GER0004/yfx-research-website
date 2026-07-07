@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Container from "@/components/ui/Container";
 import SectionLabel from "@/components/ui/SectionLabel";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -87,6 +88,114 @@ const features = [
 
 const card = "bg-yfx-card/50 border border-border-subtle rounded-xl p-3.5";
 
+const mobileNavItems = ["Dashboard", "Portfolio", "Strategies", "Positions", "More"];
+
+const realisticCurve = "M0,135 C8,134 15,132 22,131 C30,129 35,130 42,128 C50,125 55,127 62,124 C70,120 75,122 82,118 C90,114 95,116 102,112 C110,108 115,110 122,106 C128,103 133,105 140,100 C148,96 152,98 160,93 C165,90 170,92 178,87 C185,83 190,86 198,80 C205,76 208,79 215,74 C220,71 225,73 232,68 C238,65 242,67 250,62 C255,59 260,61 268,56 C275,52 278,55 285,50 C290,47 295,49 302,44 C308,41 312,43 318,39 C324,36 328,38 335,33 C340,31 345,34 352,30 C358,27 362,30 368,26 C375,22 380,25 388,20 C395,16 400,19 408,15 C415,12 420,14 428,11 C435,9 440,11 448,8 C455,6 460,9 468,7 C475,5 482,7 490,5 C498,4 505,6 512,4 C520,3 528,5 535,4 C542,3 548,4 555,3 C562,3 568,4 575,3 C582,2 588,3 595,2 L600,2";
+
+/* ── Mobile Equity Curve ──────────────────────────────────── */
+
+function MobileEquityCurve() {
+  const svgRef = useRef(null);
+  const lineRef = useRef(null);
+  const dotRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+  const [drawn, setDrawn] = useState(false);
+  const rafRef = useRef(null);
+
+  useEffect(() => {
+    const el = svgRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold: 0.1 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+    const line = lineRef.current;
+    if (!line) return;
+    const len = line.getTotalLength();
+    line.style.strokeDasharray = `${len}`;
+    line.style.strokeDashoffset = `${len}`;
+    requestAnimationFrame(() => {
+      line.style.transition = "stroke-dashoffset 3.5s cubic-bezier(0.22, 1, 0.36, 1)";
+      line.style.strokeDashoffset = "0";
+    });
+  }, [visible]);
+
+  useEffect(() => {
+    if (!visible || drawn) return;
+    const id = setInterval(() => {
+      const line = lineRef.current;
+      if (!line) return;
+      const offset = parseFloat(getComputedStyle(line).strokeDashoffset);
+      if (offset < 1) {
+        setDrawn(true);
+        clearInterval(id);
+      }
+    }, 200);
+    return () => clearInterval(id);
+  }, [visible, drawn]);
+
+  useEffect(() => {
+    if (!drawn) return;
+    const dot = dotRef.current;
+    if (!dot) return;
+    let t = 0;
+    const baseY = 2;
+    const tick = () => {
+      t += 0.015;
+      const dy = Math.sin(t * 2.1) * 1.8 + Math.sin(t * 5.3) * 0.6;
+      dot.setAttribute("cy", String(baseY + dy));
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, [drawn]);
+
+  return (
+    <div className="h-[80px] relative">
+      <svg ref={svgRef} viewBox="0 0 600 140" className="w-full h-full" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="mob-eq-fill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#2563EB" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="#2563EB" stopOpacity="0" />
+          </linearGradient>
+          <clipPath id="mob-reveal">
+            <rect x="0" y="0" width={visible ? 600 : 0} height="140" style={{ transition: "width 3.5s cubic-bezier(0.22, 1, 0.36, 1)" }} />
+          </clipPath>
+          <filter id="mob-glow">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
+        <path d={`${realisticCurve} L600,140 L0,140Z`} fill="url(#mob-eq-fill)" clipPath="url(#mob-reveal)" style={{ opacity: visible ? 1 : 0, transition: "opacity 0.6s ease-out 0.5s" }} />
+        <path
+          ref={lineRef}
+          d={realisticCurve}
+          fill="none" stroke="#2563EB" strokeWidth="2"
+          vectorEffect="non-scaling-stroke"
+          strokeLinejoin="round" strokeLinecap="round"
+          filter="url(#mob-glow)"
+        />
+        <circle
+          ref={dotRef}
+          cx="600" cy="2" r="3"
+          fill="#2563EB" stroke="#0c1120" strokeWidth="1.5"
+          vectorEffect="non-scaling-stroke"
+          style={{ opacity: drawn ? 1 : 0, transition: "opacity 0.5s ease-out" }}
+        />
+      </svg>
+      <div className="flex justify-between text-[7px] text-text-faint/50 font-mono mt-1 px-0.5">
+        <span>Jan</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Nov</span>
+      </div>
+    </div>
+  );
+}
+
 /* ── Mobile Dashboard ─────────────────────────────────────── */
 
 function MobileDashboard() {
@@ -101,6 +210,20 @@ function MobileDashboard() {
         <span className="w-[7px] h-[7px] rounded-full bg-[#febc2e]/80" />
         <span className="w-[7px] h-[7px] rounded-full bg-[#28c840]/80" />
         <span className="ml-3 text-[9px] text-text-faint font-mono">platform.yfxresearch.com</span>
+      </div>
+
+      {/* App nav bar */}
+      <div className="flex items-center border-b border-border-subtle bg-yfx-black/40">
+        {mobileNavItems.map((item, i) => (
+          <span
+            key={item}
+            className={`flex-1 text-center py-2 text-[9px] font-medium leading-none ${
+              i === 0
+                ? "text-yfx-brand-light border-b border-yfx-brand"
+                : "text-text-muted"
+            }`}
+          >{item}</span>
+        ))}
       </div>
 
       <div className="p-3 flex flex-col gap-2">
@@ -128,6 +251,15 @@ function MobileDashboard() {
             <span className="block text-sm font-semibold text-text-primary font-mono leading-none">+$1,842</span>
             <span className="inline-block mt-1.5 text-[8px] font-mono font-medium leading-none px-1.5 py-[2px] rounded-md bg-[#4ADE80]/10 text-[#4ADE80]">+1.47%</span>
           </div>
+        </div>
+
+        {/* Equity Curve */}
+        <div className={card}>
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[9px] text-text-secondary font-medium">Equity Curve</span>
+            <span className="text-[8px] text-text-faint border border-border-subtle rounded-md px-1.5 py-[2px] leading-none">YTD ▾</span>
+          </div>
+          <MobileEquityCurve />
         </div>
 
         {/* Signals */}

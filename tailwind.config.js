@@ -29,8 +29,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans:  ["Inter", "system-ui", "-apple-system", "sans-serif"],
-        mono:  ["Space Grotesk", "SF Mono", "monospace"],
+        sans:  ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
+        mono:  ["var(--font-space-grotesk)", "SF Mono", "monospace"],
       },
       fontSize: {
         "hero":    ["clamp(3rem, 6.5vw, 5rem)",    { lineHeight: "1.05", letterSpacing: "-0.03em" }],

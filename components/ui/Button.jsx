@@ -1,5 +1,3 @@
-"use client";
-
 const variants = {
   outline: [
     "bg-transparent text-text-primary",

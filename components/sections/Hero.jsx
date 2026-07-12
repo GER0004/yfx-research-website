@@ -16,8 +16,9 @@ export default function Hero() {
           muted
           loop
           playsInline
-          preload="auto"
-          src="/videos/hero-wave.webm"
+          preload="metadata"
+          poster="/images/hero-poster.png"
+          src="/videos/hero-wave.mp4"
         />
       </div>
 

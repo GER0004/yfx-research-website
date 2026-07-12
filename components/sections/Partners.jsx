@@ -45,8 +45,7 @@ function PartnerLogo({ partner }) {
 
 export default function Partners() {
   const strip = [...partners, ...partners, ...partners, ...partners,
-                 ...partners, ...partners, ...partners, ...partners,
-                 ...partners, ...partners, ...partners, ...partners];
+                 ...partners, ...partners];
 
   return (
     <section
@@ -94,6 +93,8 @@ export default function Partners() {
         .partners-track {
           animation: partnersScroll 35s linear infinite;
           width: max-content;
+          will-change: transform;
+          contain: layout style;
         }
         .group:hover .partners-track {
           animation-play-state: paused;

@@ -60,13 +60,14 @@ function ParticleCanvas({ cardRefs, hoveredCard }) {
     lastTransfer: 0,
     dpr: 1,
     isMobile: false,
+    cachedBounds: [],
   });
 
-  const getCardBounds = useCallback(() => {
+  const updateBoundsCache = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return [];
     const cRect = canvas.getBoundingClientRect();
-    return cardRefs.current.map((el) => {
+    const bounds = cardRefs.current.map((el) => {
       if (!el) return null;
       const r = el.getBoundingClientRect();
       return {
@@ -78,6 +79,8 @@ function ParticleCanvas({ cardRefs, hoveredCard }) {
         cy: r.top - cRect.top + r.height / 2,
       };
     });
+    stateRef.current.cachedBounds = bounds;
+    return bounds;
   }, [cardRefs]);
 
   useEffect(() => {
@@ -101,11 +104,12 @@ function ParticleCanvas({ cardRefs, hoveredCard }) {
       canvas.style.width = w + "px";
       canvas.style.height = h + "px";
       ctx.setTransform(s.dpr, 0, 0, s.dpr, 0, 0);
+      updateBoundsCache();
       initParticles();
     }
 
     function initParticles() {
-      const bounds = getCardBounds();
+      const bounds = s.cachedBounds;
       s.particles = [];
       const countPer = s.isMobile ? 25 : 50;
       bounds.forEach((b, ci) => {
@@ -167,7 +171,7 @@ function ParticleCanvas({ cardRefs, hoveredCard }) {
       const h = canvas.height / s.dpr;
       ctx.clearRect(0, 0, w, h);
 
-      const bounds = getCardBounds();
+      const bounds = s.cachedBounds;
       const hovered = hoveredCard.current;
 
       // Internal particles
@@ -258,7 +262,7 @@ function ParticleCanvas({ cardRefs, hoveredCard }) {
       cancelAnimationFrame(raf);
       ro.disconnect();
     };
-  }, [getCardBounds, hoveredCard]);
+  }, [updateBoundsCache, hoveredCard]);
 
   return (
     <canvas

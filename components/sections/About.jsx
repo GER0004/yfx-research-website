@@ -44,7 +44,7 @@ export default function About() {
               transform: "scale(1.55)",
               filter: "brightness(1.3) contrast(1.05)",
             }}
-            autoPlay muted loop playsInline preload="auto"
+            autoPlay muted loop playsInline preload="none"
             src="/videos/yfx-research-intro.mp4"
           />
           {/* Desktop: original */}
@@ -55,7 +55,7 @@ export default function About() {
               objectFit: "cover",
               transform: "scale(1.06)",
             }}
-            autoPlay muted loop playsInline preload="auto"
+            autoPlay muted loop playsInline preload="none"
             src="/videos/yfx-research-intro.mp4"
           />
 

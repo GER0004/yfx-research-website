@@ -128,16 +128,11 @@ function MobileEquityCurve() {
 
   useEffect(() => {
     if (!visible || drawn) return;
-    const id = setInterval(() => {
-      const line = lineRef.current;
-      if (!line) return;
-      const offset = parseFloat(getComputedStyle(line).strokeDashoffset);
-      if (offset < 1) {
-        setDrawn(true);
-        clearInterval(id);
-      }
-    }, 200);
-    return () => clearInterval(id);
+    const line = lineRef.current;
+    if (!line) return;
+    const handler = () => setDrawn(true);
+    line.addEventListener("transitionend", handler);
+    return () => line.removeEventListener("transitionend", handler);
   }, [visible, drawn]);
 
   useEffect(() => {

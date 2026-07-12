@@ -86,7 +86,7 @@ export default function Technology() {
               muted
               loop
               playsInline
-              preload="auto"
+              preload="none"
               src="/videos/technology-blueprint.mp4"
               style={{
                 mask: "radial-gradient(ellipse 85% 85% at 50% 50%, black 40%, transparent 100%)",

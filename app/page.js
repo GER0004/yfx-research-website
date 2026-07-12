@@ -1,16 +1,18 @@
+import dynamic from "next/dynamic";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import Partners from "@/components/sections/Partners";
 import About from "@/components/sections/About";
-import Solutions from "@/components/sections/Solutions";
-import Technology from "@/components/sections/Technology";
-import Performance from "@/components/sections/Performance";
-import Platform from "@/components/sections/Platform";
-import Process from "@/components/sections/Process";
-import Ecosystem from "@/components/sections/Ecosystem";
-import CTA from "@/components/sections/CTA";
-import EarlyAccess from "@/components/sections/EarlyAccess";
+
+const Solutions = dynamic(() => import("@/components/sections/Solutions"));
+const Technology = dynamic(() => import("@/components/sections/Technology"));
+const Performance = dynamic(() => import("@/components/sections/Performance"));
+const Platform = dynamic(() => import("@/components/sections/Platform"));
+const Process = dynamic(() => import("@/components/sections/Process"));
+const Ecosystem = dynamic(() => import("@/components/sections/Ecosystem"));
+const CTA = dynamic(() => import("@/components/sections/CTA"));
+const EarlyAccess = dynamic(() => import("@/components/sections/EarlyAccess"));
 
 export default function Home() {
   return (
